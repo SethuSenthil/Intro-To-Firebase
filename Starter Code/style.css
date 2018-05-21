@@ -1,0 +1,114 @@
+.btn{
+    border-radius: 30px;
+   }
+   nav .firebase-txt{
+    -webkit-transition-duration:.5s;
+transition-duration:.5s;
+   }
+   nav .firebase-txt:hover{
+     color: #FECA41;
+   }
+   #userSec,.navbar-brand{
+font-size: 25px;
+-webkit-transition-duration:.5s;
+transition-duration:.5s;
+font-weight: 600;
+}
+#photoUser{
+display: none;
+width: 40px;
+height: 40px;
+border-radius:35px;
+vertical-align: middle;
+float: left;
+margin-left: 10px;
+margin-right: 5px;
+-webkit-transition-duration:1.7s;
+transition-duration:1.7s;
+}
+.navbar-brand{
+font-weight: 700;
+}
+#userSec:hover{
+background-color:rgba(120, 144, 156, 0.61);
+border-radius: 20px;
+cursor: pointer;
+}
+#userSec:hover #photoUser{
+transform: rotate(20deg);
+}
+.dropdown-menu{
+position:absolute;
+right:0px;
+}
+.dropdown-item:active{
+background-color: #3F729B;
+}
+#restricted{
+display:none;
+}
+footer{
+    display: block;
+}
+.google-button {
+height: 40px;
+border-width: 0;
+background: white;
+color: #737373;
+border-radius: 30px;
+white-space: nowrap;
+transition-property: background-color, box-shadow;
+transition-duration: 150ms;
+transition-timing-function: ease-in-out;
+padding: 0;
+}
+.google-button:focus, .google-button:hover {
+box-shadow: 1px 4px 5px 1px rgba(0, 0, 0, 0.1);
+outline:0 !important;
+}
+.google-button:active {
+background-color: #e5e5e5;
+box-shadow: none;
+transition-duration: 10ms;
+}
+
+.google-button__icon {
+display: inline-block;
+vertical-align: middle;
+margin: 8px 0 8px 8px;
+width: 18px;
+height: 18px;
+box-sizing: border-box;
+}
+
+.google-button__icon--plus {
+width: 27px;
+}
+
+.google-button__text {
+display: inline-block;
+vertical-align: middle;
+padding: 0 24px;
+font-size: 14px;
+font-weight: bold;
+font-family: 'Roboto',arial,sans-serif;
+}
+.email-button, .google-button__icon{
+color: red;
+}
+.email-button,.google-button__text{
+color: #737373 ; 
+}
+.fa-star,.fa-book,.fa-file-powerpoint{
+-webkit-transition-duration:.5s;
+transition-duration:.5s;
+}
+.fa-star:hover{
+    color:#ffbb33;
+}
+.fa-book:hover{
+    color:black;
+}
+.fa-file-powerpoint:hover{
+    color: #f57c00;
+}

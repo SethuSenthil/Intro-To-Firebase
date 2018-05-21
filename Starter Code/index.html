@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+  <gfont> 
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Intro to Firebase</title>
+<!-- The firebase import stuff-->
+    <script defer src="/__/firebase/5.0.2/firebase-app.js"></script>
+    <script defer src="/__/firebase/5.0.2/firebase-auth.js"></script>
+    <script defer src="/__/firebase/init.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.0/css/mdb.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://sethusenthil.com/Product-Sans/font/font.css">     
+    <link rel="stylesheet" href="./style.css">  
+  </head>
+
+  <body>
+    <!--Navbar stuff-->
+<nav class="navbar navbar-dark unique-color">
+    <a class="navbar-brand" href="#" style="text-align: center;">Intro to <span class="firebase-txt">firebase</span></a>
+    <span id="userSec" data-toggle="dropdown">
+      <i class="fas fa-user-circle" id="userPhoto"></i>
+    <span id="userDisplayName" class="dropdown-toggle">Login  </span>&nbsp;&nbsp;&nbsp;&nbsp;
+    <img id="photoUser"> 
+    <div class="dropdown-menu">
+        <a class="dropdown-item" href="#" onclick="googleLogin()">Login With google_logo</a>
+        <a class="dropdown-item"  href="#" onclick="showLoginEmail()">Login With Email</a>
+        <a class="dropdown-item" href="#" onclick="showSignUpEmail()">Signup with Email</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="#" onclick="logout()">Log out <i class="fas fa-sign-out-alt"></i></a>
+    </div>
+</span>
+</nav>
+
+<br>
+<!--Logged in users can only see this content-->
+<span id="restricted">
+    <center>
+    <div id="userFortune">
+    </div>
+    <br>
+    <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+        <label class="form-check-label" for="exampleCheck1">Sign up for our newsletter (we promise, we <b>will spam </b>your inbox)</label>
+      </div>
+    <p id="userEmail"></p>
+  </center>
+  </span>
+
+
+<!-- Not the most secure way to do this in a real world situtation-->
+<!-- Logged out users can only see this content-->
+<span id="unrestricted">
+
+    <center>
+      <!--Login with Google Button-->
+        <button type="button" class="google-button  z-depth-1">
+            <span class="google-button__icon">
+              <svg viewBox="0 0 366 372" xmlns="http://www.w3.org/2000/svg"><path d="M125.9 10.2c40.2-13.9 85.3-13.6 125.3 1.1 22.2 8.2 42.5 21 59.9 37.1-5.8 6.3-12.1 12.2-18.1 18.3l-34.2 34.2c-11.3-10.8-25.1-19-40.1-23.6-17.6-5.3-36.6-6.1-54.6-2.2-21 4.5-40.5 15.5-55.6 30.9-12.2 12.3-21.4 27.5-27 43.9-20.3-15.8-40.6-31.5-61-47.3 21.5-43 60.1-76.9 105.4-92.4z" id="Shape" fill="#EA4335"/><path d="M20.6 102.4c20.3 15.8 40.6 31.5 61 47.3-8 23.3-8 49.2 0 72.4-20.3 15.8-40.6 31.6-60.9 47.3C1.9 232.7-3.8 189.6 4.4 149.2c3.3-16.2 8.7-32 16.2-46.8z" id="Shape" fill="#FBBC05"/><path d="M361.7 151.1c5.8 32.7 4.5 66.8-4.7 98.8-8.5 29.3-24.6 56.5-47.1 77.2l-59.1-45.9c19.5-13.1 33.3-34.3 37.2-57.5H186.6c.1-24.2.1-48.4.1-72.6h175z" id="Shape" fill="#4285F4"/><path d="M81.4 222.2c7.8 22.9 22.8 43.2 42.6 57.1 12.4 8.7 26.6 14.9 41.4 17.9 14.6 3 29.7 2.6 44.4.1 14.6-2.6 28.7-7.9 41-16.2l59.1 45.9c-21.3 19.7-48 33.1-76.2 39.6-31.2 7.1-64.2 7.3-95.2-1-24.6-6.5-47.7-18.2-67.6-34.1-20.9-16.6-38.3-38-50.4-62 20.3-15.7 40.6-31.5 60.9-47.3z" fill="#34A853"/></svg>
+            </span>
+            <span class="google-button__text" onclick="googleLogin()">Login in with <gfont>google_logo</gfont></span>
+          </button>
+          
+        <!--Login with Email-->
+          <button type="button" class="google-button email-button  z-depth-1"  data-toggle="modal" data-target="#withGmail">
+              <span class="google-button__icon">
+                  <i class="fas fa-envelope"></i>
+              </span>
+              <span class="google-button__text">Sign in with Email</span>
+            </button>
+            <br>
+            <br>
+      <h1>Please login to continue</h1>
+    </center>
+</span>
+
+ <!--Email Login Modal-->
+<div class="modal fade" id="withGmail" tabindex="-1" role="dialog" aria-labelledby="withEmail" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="withEmail">Login with Email</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="login_div" class="main-div">
+                    <div class="md-form">
+                        <input type="email" id="email_field" />
+                        <label for="form1">Email</label>
+                    </div>
+                    <div id="login_div" class="main-div">
+                        <div class="md-form">
+                            <input type="password" id="password_field" />
+                            <label for="form1">Password</label>
+                        </div>
+                  </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="login()">Login</button>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
+<!-- Footer stuff dont worry about it-->
+<footer class="page-footer font-small blue pt-4 mt-4 fixed-bottom unique-color">
+
+    <div class="container-fluid text-center text-md-left">
+        <div class="row">
+
+            <div class="col-md-6">
+                <h5 class="gfont">Intro to firebase</h5>
+                <p>By: <a href="#" onclick="window.open('https://SethuSenthil.com')" class="gfont">Sethu Senthil</a></p>
+            </div>
+
+            <div class="col-md-6">
+                <i class="fas fa-star fa-3x"></i> 
+                &nbsp; &nbsp; &nbsp;                 &nbsp; &nbsp; &nbsp;
+                <i class="fas fa-book fa-3x" onclick="window.open('https://firebase.google.com/docs/auth/')"></i>
+                &nbsp; &nbsp; &nbsp;                 &nbsp; &nbsp; &nbsp;
+                <i class="fas fa-file-powerpoint fa-3x" onclick="window.open('https://docs.google.com/presentation/d/1Kz5HcQzhL6r3PPG3XlQbXO2NFgJx_9JtEWCI3kg8l2U/edit?usp=sharing')"></i>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright py-3 text-center">
+       <span id="whatHover"></span>
+    </div>
+</footer>
+
+ <!--Email Signup Modal-->
+<div class="modal fade" id="withGmailSG" tabindex="-1" role="dialog" aria-labelledby="withEmailSG" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="withEmailSG">Signup with Email</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="login_div" class="main-div">
+                    <div class="md-form">
+                        <input type="email" id="email_field_sg" />
+                        <label for="form1">Email</label>
+                    </div>
+                    <div id="login_div" class="main-div">
+                        <div class="md-form">
+                            <input type="password" id="password_field_sg" />
+                            <label for="form1">Password</label>
+                        </div>
+                  </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="signUp()">SignUp</button>
+            </div>
+        </div>
+      </div>
+  </body>
+
+                      
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.5.0/js/mdb.min.js"></script>
+  <script type="text/javascript" src="app.js"></script> 
+</html>
